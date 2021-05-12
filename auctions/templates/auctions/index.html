@@ -1,0 +1,52 @@
+{% extends "auctions/layout.html" %} 
+
+{% block body %}
+<h2 class="px-3 mb-3">{{ title }}</h2>
+
+<ul class="list-group list-group-flush">
+  {% if not listings %}
+  <li class="list-group-item py-5">
+    <div class="row align-items-center">
+      <h6>No data</h6>
+    </div>
+  </li>
+  {% endif %}
+  {% for listing in listings %}
+  <li class="list-group-item py-5">
+    <div class="row align-items-center">
+      <div class="col-sm-2 pd-2 py-4">
+        <img src="{{ listing.listingimageurl }}" class="rounded mx-auto d-block" alt="listing picture" />
+      </div>
+      <div class="col-md">
+        <div class="row justify-content-center">
+          <div class="col-sm">
+						<a class="btn btn-warning mb-3" href="{% url 'listing' listing.id %}"><h5 class="m-0">{{ listing.title }}</h5></a>
+            <h6>
+              <small class="text-muted">Description: </small>
+              {{ listing.description }}
+            </h6>
+            <h6>
+              <small class="text-muted"
+                >Category: {{ listing.get_category_display }}</small
+              >
+            </h6>
+          </div>
+          <div class="col-sm">
+            <h6>
+              <small class="text-muted">Listed by: {{ listing.user }}</small>
+            </h6>
+            <h6>
+              <small class="text-muted">{{ listing.listed }}</small>
+            </h6>
+            <h6>
+              <small class="text-muted">Price: </small>
+              {{ listing.price }} $
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
