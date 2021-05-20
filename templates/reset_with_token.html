@@ -1,0 +1,97 @@
+{% extends 'layout.html' %} {% block title %}Jelszó visszaállítása{%endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-lg-6">
+      <form
+        action="{{ url_for('reset_with_token', token=token) }}"
+        method="post"
+        class="row g-3 needs-validation"
+        novalidate
+      >
+        <div class="row">
+          <div class="col-md py-3">
+            <h5 class="py-3">Jelszó visszaállítása</h5>
+            <label for="validationCustomPassword" class="form-label"
+              >Add meg az új jelszavad</label
+            >
+            <div class="input-group has-validation">
+              <input
+                autocomplete="off"
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <i class="input-group-text" id="showpassword">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-eye"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#333333"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="12" cy="12" r="2" />
+                  <path
+                    d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"
+                  />
+                </svg>
+              </i>
+              <div class="invalid-feedback">Válassz jelszót.</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md py-3">
+            <button class="btn" type="submit">Küldés</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+<script>
+  let showPasswordBtn = document.querySelector("#showpassword");
+  let passwordInput = document.querySelector("#password");
+
+  showPasswordBtn.addEventListener("click", function (e) {
+    // toggle the type attribute
+    const type =
+      passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+  });
+
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
+{% endblock %}

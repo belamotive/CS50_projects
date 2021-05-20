@@ -1,0 +1,28 @@
+{% extends 'layout.html' %} {% block title %}Belépés{%endblock %} {% block
+content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-lg-6">
+      {% for message in get_flashed_messages() %}
+      <div class="alert alert-primary" role="alert">
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %}
+      <p>
+        Hagyd jóvá fiókod. Az általad megadott e-mail-címre elküldtük a
+        jóváhagyáshoz szükséges linket.{% if email %} : {{ email }} {% else %} .
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+{% endblock %}

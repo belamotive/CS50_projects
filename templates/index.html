@@ -1,0 +1,438 @@
+{% extends 'layout.html' %} {% block title %}Lesz kapás?{% endblock %} 
+
+{% block
+content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5 p-3 gsapdelay1">
+      <div class="row">
+        {% for message in get_flashed_messages() %}
+      <div class="alert alert-secondary d-flex justify-content-between" role="alert">
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %}
+        <div class="col-xl-8">
+          <div class="searchlocation input-group has-validation">
+            <input
+              autocomplete="off"
+              class="form-control"
+              placeholder="Település keresése"
+              id="searchlocation"
+            />
+            <i class="input-group-text" id="searchbtn"">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-search"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#333333"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <circle cx="10" cy="10" r="7" />
+                <line x1="21" y1="21" x2="15" y2="15" />
+              </svg>
+            </i>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+        <div class="col">
+
+        </div>
+      </div>
+      <div class="col">
+        <h3 class="gray pt-4">Jelenleg</h3>
+        <h1 class="display-1 m-0" id="currenttemp"></h1>
+        <h5 class="gray" id="currentdesc"></h5>
+        <h5 id="currentlocation"></h5>
+
+        
+        {% if session.user_id %}
+        {% if place %}
+        <div class="dropdown mb-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Településeim
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            {% for place_name in place %}
+              <button class="dropdown-item" type="button" onclick="getPlaceSearchedFor('{{ place_name[0] }}')">{{ place_name[0] }}</button>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        <form action="/" method="post">
+          <input type="text" id="save_user_place" name="save_user_place">
+          <button
+            type="submit"
+            class="btn align-middle"
+            id="saveplace"
+            name="saveplace"
+            disabled
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-1 icon-tabler-circle-plus"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="9" />
+              <line x1="9" y1="12" x2="15" y2="12" />
+              <line x1="12" y1="9" x2="12" y2="15" />
+            </svg>
+            Mentés
+          </button>
+        </form>
+
+        {% else %}
+
+        <form action="/login" method="get">
+          <input type="text" id="save_user_place" name="save_user_place">
+          <button
+            type="submit"
+            class="btn align-middle"
+            id="saveplace"
+            disabled
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-1 icon-tabler-circle-plus"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="9" />
+              <line x1="9" y1="12" x2="15" y2="12" />
+              <line x1="12" y1="9" x2="12" y2="15" />
+            </svg>
+            Mentés
+          </button>
+        </form>
+
+        {% endif %}
+      </div>
+      <div
+        class="m-4 col-lg p-2 mb-0 borderradius position-relative"
+        style="height: 200px"
+      >
+        <div class="kozep position-absolute top-50 start-50 translate-middle">
+          <h5 class="center" id="catchinfo"></h5>
+          <h5 class="center" id="catchmoonphase"></h5>
+          <h5 class="center m-0" id="catchpressure"></h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-7 p-3">
+      <div class="gsapdelay2">
+
+        <h5 class="pt-2 pb-3">Részletes jelentés</h5>
+        <div class="row currentinfo">
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-sunset"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M3 17h1m16 0h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7m-9.7 5.7a4 4 0 0 1 8 0"
+              />
+              <line x1="3" y1="21" x2="21" y2="21" />
+              <path d="M12 9v-6l3 3m-6 0l3 -3" />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Napkelte</h6>
+              <h6 class="gray" id="currentsunrise"></h6>
+            </div>
+          </div>
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-sunshine"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M3 17h1m16 0h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7m-9.7 5.7a4 4 0 0 1 8 0"
+              />
+              <line x1="3" y1="21" x2="21" y2="21" />
+              <path d="M12 3v6l3 -3m-6 0l3 3" />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Napnyugta</h6>
+              <h6 class="gray" id="currentsunset"></h6>
+            </div>
+          </div>
+        </div>
+        <div class="row currentinfo">
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-temperature-plus"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M8 13.5a4 4 0 1 0 4 0v-8.5a2 2 0 0 0 -4 0v8.5" />
+              <line x1="8" y1="9" x2="12" y2="9" />
+              <line x1="16" y1="9" x2="22" y2="9" />
+              <line x1="19" y1="6" x2="19" y2="12" />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Napi max</h6>
+              <h6 class="gray" id="dailymaxtemp"></h6>
+            </div>
+          </div>
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-wind"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M5 8h8.5a2.5 2.5 0 1 0 -2.34 -3.24" />
+              <path d="M3 12h15.5a2.5 2.5 0 1 1 -2.34 3.24" />
+              <path d="M4 16h5.5a2.5 2.5 0 1 1 -2.34 3.24" />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Szél</h6>
+              <h6 class="gray" id="currentwind"></h6>
+            </div>
+          </div>
+        </div>
+        <div class="row currentinfo">
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-dashboard"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="13" r="2" />
+              <line x1="13.45" y1="11.55" x2="15.5" y2="9.5" />
+              <path d="M6.4 20a9 9 0 1 1 11.2 0z" />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Légnyomás</h6>
+              <h6 class="gray" id="currentpressure"></h6>
+            </div>
+          </div>
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-sun"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"
+              />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">UV</h6>
+              <h6 class="gray" id="currentuvi"></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gsapdelay3">
+
+        <h5 class="pt-3 pb-3">Szolunáris adatok</h5>
+        <div class="row currentinfo">
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-arrow-up-circle"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="9" />
+              <line x1="12" y1="8" x2="8" y2="12" />
+              <line x1="12" y1="8" x2="12" y2="16" />
+              <line x1="16" y1="12" x2="12" y2="8" />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Holdkelte</h6>
+              <h6 class="gray" id="moonrise"></h6>
+            </div>
+          </div>
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-arrow-down-circle"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="9" />
+              <line x1="8" y1="12" x2="12" y2="16" />
+              <line x1="12" y1="8" x2="12" y2="16" />
+              <line x1="16" y1="12" x2="12" y2="16" />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Holdnyugta</h6>
+              <h6 class="gray" id="moonset"></h6>
+            </div>
+          </div>
+        </div>
+        <div class="row currentinfo">
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-arrow-right-circle"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#040F16"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+              <line x1="16" y1="12" x2="8" y2="12"></line>
+              <line x1="16" y1="12" x2="12" y2="16"></line>
+              <line x1="16" y1="12" x2="12" y2="8"></line>
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Holdtranzit</h6>
+              <h6 class="gray" id="moontransit"></h6>
+            </div>
+          </div>
+          <div class="currentinfocell">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler mb-2 icon-tabler-moon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#333333"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
+              />
+            </svg>
+            <div class="col py-2">
+              <h6 class="mb-1">Holdtölte</h6>
+              <h6 class="gray" id="moonillumination"></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-5 p-3 gsapdelay4">
+      <h5 class="pb-3">24 órás előrejelzés</h5>
+      <div class="overflow-scroll p-0 borderradius">
+          <table
+            class="mb-0 table table-borderless overflow-scroll"
+            id="twentyfourtable"
+          >
+            <tbody id="deletedaily"></tbody>
+          </table>
+      </div>
+    </div>
+    <div class="col-lg-7 p-3 gsapdelay5">
+      <h5 class="pb-3">Heti előrejelzés</h5>
+      <div class="overflow-scroll p-0 borderradius">
+        <table
+          class="mb-0 table table-borderless overflow-scroll"
+          id="weeklytable"
+        >
+          <tbody id="deleteweekly"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename= 'scripts/suncalc-master/suncalc.js') }}"></script>
+<script src="{{ url_for('static', filename= 'scripts/main.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'layout.html' %} {% block title %}Lesz kapás? - Kapcsolat{%endblock
+%} {% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-lg-6">
+      {% for message in get_flashed_messages() %}
+      <div
+        class="alert alert-danger d-flex justify-content-between"
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %}
+      <form
+        action="/contact"
+        method="post"
+        class="row g-3 needs-validation"
+        novalidate
+      >
+        <div class="row">
+          <h5 class="py-3">Lépj velünk kapcsolatba</h5>
+          <div class="col-md py-3">
+            <label for="validationCustomUsername" class="form-label"
+              >Neved</label
+            >
+            <div class="msg">{{ msg }}</div>
+            <div class="input-group has-validation">
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="validationCustomUsername"
+                name="name"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <div class="invalid-feedback">Add meg a neved.</div>
+            </div>
+          </div>
+          <div class="col-md py-3">
+            <label for="validationCustomEmail" class="form-label"
+              >E-mail-címed</label
+            >
+            <div class="input-group has-validation">
+              <input
+                type="text"
+                class="form-control"
+                id="validationCustomEmailAddress"
+                name="emailaddress"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <div class="invalid-feedback">Add meg az e-mail-címed.</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md py-3">
+            <label for="validationCustomEmail" class="form-label"
+              >Üzenet</label
+            >
+            <div class="input-group has-validation">
+              <textarea
+                type="text"
+                class="form-control"
+                id="validationCustomEmailAddress"
+                name="message"
+                aria-describedby="inputGroupPrepend"
+                rows="7"
+                required
+              ></textarea>
+              <div class="invalid-feedback">Írd meg üzeneted.</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- <div class="col-md py-3">
+            <button
+              class="g-recaptcha"
+              data-sitekey="reCAPTCHA_site_key"
+              data-callback="onSubmit"
+              data-action="submit"
+            >
+              Submit
+            </button>
+          </div> -->
+          <div class="col-md py-3">
+            <button class="btn" type="submit">Küldés</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+<script>
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+
+  /* function onSubmit(token) {
+    document.getElementById("demo-form").submit();
+  } */
+</script>
+<!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
+{% endblock %}

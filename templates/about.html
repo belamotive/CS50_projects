@@ -1,0 +1,39 @@
+{% extends 'layout.html' %} {% block title %}Lesz kapás? - Rólunk{%endblock %}
+{% block content %}
+<div class="container pt-5 p-3 about">
+  <h3 class="mb-5">Üdvözlünk!</h3>
+  <h5 class="mb-4">Tervezz előre a Lesz kapás? oldallal</h5>
+  <p class="lh-lg">
+    Ezt a weblapot azért hoztuk létre, hogy megkönnyítse horgásztársaink életét
+    azzal, hogy egy helyen, gyorsan és hatékonyan megtaláljanak minden olyan
+    időjárással kapcsolatos információt, ami egy sikeres horgászat
+    megtervezéséhez szükséges lehet.
+  </p>
+  <p class="lh-lg">
+    Egyéni tapasztalataink, valamint számos cikk és tanulmány elolvasása után
+    arra a következtetésre jutottunk, hogy a halak táplálkozását (megannyi más
+    tényező mellett) 3 fő változó befolyásolja:
+  </p>
+  <ul class="lh-lg">
+    <li>légnyomás</li>
+    <li>holdjárás</li>
+    <li>holdtölte</li>
+  </ul>
+  <p class="lh-lg">
+    Ezeket az adatokat gyűjtöttük össze úgy egy felületre, hogy azok könnyedén
+    befogadhatók és értelmezhetők legyenek. <a href="{{ url_for('index')}}">Keress rá a kívánt településre</a>, és
+    tervezd meg a hétvégi pecát, vagy nézd meg, milyen fogási eredményeket hoz a
+    délután!
+  </p>
+  <h5 class="my-4">Olvasnivaló a tópartra</h5>
+  <p class="lh-lg">Válogatás az általunk érdekesnek talált cikkekből:</p>
+  <ul class="lh-lg">
+    <li>Lajos Tibor - <a href="https://www.facebook.com/notes/lajos-tibor/mikor-érdemes-horgászni/1279143678852211/" target="_blank">Mikor érdemes horgászni?</a></li>
+    <li>Jávorka Dániel - <a href="https://www.haldorado.hu/topikok/horgasziskola-kezdoknek-c10/pontysuli-c24/az-abiotikus-kornyezeti-tenyezok-hatasai-a-pontyok-taplalkozasara-1-a-homerseklet-a-legnyomas-es-a-frontok-a2722" target="_blank">Az abiotikus környezeti tényezők hatásai a pontyok táplálkozására</a></li>
+    <li>Dobó Ferenc - <a href="https://horgaszat.hu/horgaszirodalom/a-ponty-etvagyaval-kapcsolatos-tudnivalok-dobo-ferenc-sporthorgaszat-1931" target="_blank">A ponty étvágyával kapcsolatos tudnivalók</a></li>
+    <li>Joe Bucher - <a href="https://www.solunar.com/the_real_scoop.aspx" target="_blank">The Real Scoop</a></li>
+  </ul>
+  <h5 class="my-4">Ismerd meg időjósunkat és asztronómusunkat</h5>
+  <p class="lh-lg">Meterológiai adatainkat a londoni székhelyű <a href="https://openweathermap.org" target="_blank">OpenWeatherMap</a> biztosítja. A szolunáris jelentések <a href="https://dugb.net" target="_blank">Douglas W Bacon</a> jóvoltából kerülnek hozzánk felhasználásra.</p>
+</div>
+{% endblock %}

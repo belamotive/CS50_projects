@@ -1,0 +1,201 @@
+{% extends 'layout.html' %} {% block title %}Lesz kapás? - Fiók{%endblock %} {% block
+content %}
+
+<div class="container p-3">
+  <div class="row justify-content-evenly">
+    <div class="col-lg">
+      <div class="row">
+        <div class="col py-3">
+          <h5 class="py-3">Fiókom</h5>
+        </div>
+      </div>
+      <div id="accountinfo">
+        <div class="row">
+          {% for message in get_flashed_messages() %}
+          <div class="alert alert-danger d-flex justify-content-between" role="alert">
+            {{ message }}<button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          {% endfor %}
+          <div class="col-md">
+            <p>Felhasználónév</p>
+            <p><strong>{{ user_name }}</strong></p>
+            <div class="msg">{{ msg }}</div>
+          </div>
+          <div class="col-md">
+            <p>E-mail-cím</p>
+            <p><strong>{{ email_address }}</strong></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md py-3">
+            <a href="#" id="accounteditbtn">Szerkesztés</a>
+          </div>
+        </div>
+      </div>
+      <div id="accountupdate">
+        <form action="/account" method="post" class="" novalidate>
+          <div class="row">
+            <div class="col-md py-3">
+              <label for="validationCustomUsername" class="form-label"
+                >Felhasználónév</label
+              >
+              <div class="input-group has-validation">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  class="form-control"
+                  id="validationCustomUsername"
+                  name="new_username"
+                  aria-describedby="inputGroupPrepend"
+                  required
+                />
+                <div class="invalid-feedback">Válassz felhasználónevet.</div>
+              </div>
+            </div>
+            <div class="col-md py-3">
+              <label for="validationCustomEmail" class="form-label"
+                >Email-cím</label
+              >
+              <div class="input-group has-validation">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustomEmailAddress"
+                  name="new_emailaddress"
+                  aria-describedby="inputGroupPrepend"
+                />
+                <div class="invalid-feedback">Add meg az e-mail-címed.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <button class="btn" type="submit">Mentés</button>
+              <a class="ms-3" href="/account" id="accounteditbtn">Vissza</a>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row"></div>
+      <div id="passwordinfo">
+        <div class="col-md py-3">
+          <a href="#" id="passwordeditbtn">Jelszó megváltosztatása</a>
+        </div>
+      </div>
+      <div id="passwordupdate">
+        <form action="/passwordupdate" method="post" class="" novalidate>
+          <div class="row">
+            <div class="col-md py-3">
+              <label for="validationCustomPassword" class="form-label"
+                >Régi jelszó</label
+              >
+              <div class="input-group has-validation">
+                <input
+                  autocomplete="off"
+                  type="password"
+                  class="form-control"
+                  id="old_password"
+                  name="old_password"
+                  aria-describedby="inputGroupPrepend"
+                />
+
+                <div class="invalid-feedback">Régi jelszót.</div>
+              </div>
+            </div>
+            <div class="col-md py-3">
+              <label for="validationCustomPassword" class="form-label"
+                >Új jelszó</label
+              >
+              <div class="input-group has-validation">
+                <input
+                  autocomplete="off"
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="new_password"
+                  aria-describedby="inputGroupPrepend"
+                  required
+                />
+                <i class="input-group-text" id="showpassword">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-eye"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#333333"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="12" cy="12" r="2" />
+                    <path
+                      d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"
+                    />
+                  </svg>
+                </i>
+                <div class="invalid-feedback">Új jelszót.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <button class="btn" type="submit">Mentés</button>
+              <a class="ms-3" href="/account" id="accounteditbtn">Vissza</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col py-3">
+              {% if user_places %}
+              <h5 class="py-3">Településeim</h5>
+            </div>
+          </div>
+          <form action="/placesupdate" method="post" name="places_list">
+            <div class="row">
+              <div class="col-py-3">
+                <div class="list-group">
+                  {% for user_place in user_places %}
+                  <label class="list-group-item" for="{{ user_place[0] }}">
+                    <input
+                      class="form-check-input me-1"
+                      type="checkbox"
+                      value="{{ user_place[0] }}"
+                      id="{{ user_place[0] }}"
+                      name="places_list"
+                    />
+                    {{ user_place[0] }}
+                  </label>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md py-3">
+                <button class="btn" type="submit">Törlés</button>
+              </div>
+            </div>
+            {% endif %}
+          </form>
+        </div>
+        <div class="col-md"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/scripts/account.js"></script>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'layout.html' %} {% block title %}Lesz kapás? - Belépés{%endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-lg-6">
+      <form
+        action="/login"
+        method="post"
+        class="row g-3 needs-validation"
+        novalidate
+      >
+        <div class="row">
+          {% for message in get_flashed_messages() %}
+          <div
+            class="alert alert-danger d-flex justify-content-between"
+            role="alert"
+          >
+            {{ message }}
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          {% endfor %}
+          <h5 class="py-3">Bejelentkezés</h5>
+          <div class="col-md py-3">
+            <label for="validationCustomUsername" class="form-label"
+              >Felhasználónév</label
+            >
+            <div class="input-group has-validation">
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-control"
+                id="validationCustomUsername"
+                name="username"
+                required
+              />
+              <div class="invalid-feedback">Add meg a felhasználóneved.</div>
+            </div>
+          </div>
+          <div class="col-md py-3">
+            <label for="validationCustomPassword" class="form-label"
+              >Jelszó</label
+            >
+            <div class="input-group has-validation">
+              <input
+                autocomplete="off"
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+              <i class="input-group-text" id="showpassword">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-eye"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#333333"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="12" cy="12" r="2" />
+                  <path
+                    d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"
+                  />
+                </svg>
+              </i>
+              <div class="invalid-feedback">Add meg a jelszavad.</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md py-3">
+            <button class="btn" type="submit">Bejelentkezés</button>
+          </div>
+        </div>
+        <div class="p-3 position-relative">
+          <div
+            class="py-3 position-absolute top-50 start-50 translate-middle text-center"
+          >
+            <p>Nincs fiókod? <a href="/register">Regisztrálj!</a></p>
+            <a class="text-center" href="/reset">Elfelejtetted a jelszavad?</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+<script>
+  let showPasswordBtn = document.querySelector("#showpassword");
+  let passwordInput = document.querySelector("#password");
+
+  showPasswordBtn.addEventListener("click", function (e) {
+    // toggle the type attribute
+    const type =
+      passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+  });
+
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'layout.html' %} {% block title %}Jelszó visszaállítása{%endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-lg-6">
+      <form
+        action="/reset"
+        method="post"
+        class="row g-3 needs-validation"
+        novalidate
+      >
+        <div class="row">
+          <div class="col-md py-3">
+            <h5 class="py-3">Jelszó visszaállítása</h5>
+            <label for="validationCustomEmail" class="form-label"
+              >Add meg az email-címed</label
+            >
+            <div class="input-group has-validation">
+              <input
+                type="text"
+                class="form-control"
+                id="validationCustomEmailAddress"
+                name="emailaddress"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <div class="invalid-feedback">Add meg az e-mail-címed.</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md py-3">
+            <button class="btn" type="submit">Küldés</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+<script>
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll(".needs-validation");
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
+{% endblock %}
