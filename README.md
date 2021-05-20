@@ -13,7 +13,7 @@ Number: 4003600000000014
 VISA
 ```
 
-## [Tournament](https://github.com/belamotive/CS50_projects/tree/Tournament)
+## [Tournament](https://github.com/belamotive/CS50_projects/tree/tournament)
 A program (in Python) that simulates a number of tournaments and outputs each team’s probability of winning. Using FIFA ratings (.csv), it simulates a tournament by repeatedly simulating rounds until just one team left.
 
 Example:
