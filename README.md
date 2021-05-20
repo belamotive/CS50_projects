@@ -1,4 +1,4 @@
-# CS50_projects
+# CS50 Projects
 Several CS50 and CS50W Projects I really enjoyed during the courses.
 
 ## [Credit](https://github.com/belamotive/CS50_projects/tree/credit)
@@ -66,6 +66,29 @@ eBay-like e-commerce auction site that allow users to post auction listings, pla
 
 ### Site Preview:
 ![site preview](https://github.com/belamotive/CS50_projects/blob/c6a1e5516894537005b0fc8a8a7c983ad528cbb9/Screenshot%202021-05-20%20at%2012.04.24.jpg)
+
+### Languages:
+- HTML/CSS
+- JavaScript
+- Python
+
+### Framework:
+- Django
+
+### Database:
+- SQL (SQLite)
+
+### Tools:
+- Bootstrap
+
+## [Mail](https://github.com/belamotive/CS50_projects/tree/mail)
+
+Front-end for single-page-app email client that makes API calls to send and receive emails.
+
+[YouTube link](https://youtu.be/mOgbGypNBBQ)
+
+### Site Preview:
+![site preview](https://github.com/belamotive/CS50_projects/blob/b68bdd7e356f4fc3e85d7ab1f82fc6cf1b92d08c/Screenshot%202021-05-20%20at%2012.25.27.jpg)
 
 ### Languages:
 - HTML/CSS
