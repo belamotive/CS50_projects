@@ -1,5 +1,5 @@
 # CS50 Projects
-Several CS50 and CS50W Projects I really enjoyed during the courses.
+Several CS50 and CS50W Problem Sets and Projects I really enjoyed working on during the courses.
 
 ## [Credit](https://github.com/belamotive/CS50_projects/tree/credit)
 A program (in C) that prompts the user for a credit card number and with Luhn’s Algorithm reports (via printf) whether it is a valid American Express, MasterCard, or Visa card number.
