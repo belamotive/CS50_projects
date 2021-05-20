@@ -40,6 +40,9 @@ Web-based weather forecast application for people how likes to fish. It has all 
 
 [YouTube link](https://youtu.be/pf6ii4UWSbs)
 
+### Site Preview:
+![site preview](https://github.com/belamotive/CS50_projects/blob/ab3d296efd1fa953aa3101825f6b32091b8400b2/Screenshot%202021-05-20%20at%2012.22.33.jpg)
+
 ### Languages:
 - HTML/CSS
 - JavaScript
@@ -60,6 +63,9 @@ Web-based weather forecast application for people how likes to fish. It has all 
 eBay-like e-commerce auction site that allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
 
 [YouTube link](https://youtu.be/3ei7EcvsyVs)
+
+### Site Preview:
+![site preview](https://github.com/belamotive/CS50_projects/blob/c6a1e5516894537005b0fc8a8a7c983ad528cbb9/Screenshot%202021-05-20%20at%2012.04.24.jpg)
 
 ### Languages:
 - HTML/CSS
