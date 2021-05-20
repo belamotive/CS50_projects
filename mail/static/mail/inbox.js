@@ -39,7 +39,7 @@ function load_mailbox(mailbox) {
 }
 
 
-// Render mails
+// Render mails to UI
 function renderMails(emails) {
   const h3 = document.querySelector('.sent');
 
