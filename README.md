@@ -36,7 +36,7 @@ Mexico: 0.1% chance of winning
 ```
 
 ## [CS50 Final Project](https://github.com/belamotive/CS50_projects/tree/final_project)
-Web-based weather forecast application for people how likes to fish. It has all the data you need for fishing such as air pressure, moon illumination, wind speed and much more. It is based on a previous project that I created prior to this course during the summer of 2020.
+Web-based weather forecast application for people how likes to fish. It has all the data needed for fishing such as air pressure, moon illumination, wind speed and more. It is based on a previous project that I created prior to the course during the summer of 2020.
 
 [YouTube link](https://youtu.be/pf6ii4UWSbs)
 
