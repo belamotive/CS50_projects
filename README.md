@@ -103,3 +103,27 @@ Front-end for single-page-app email client that makes API calls to send and rece
 
 ### Tools:
 - Bootstrap
+
+
+## [Network](https://github.com/belamotive/CS50_projects/tree/network)
+
+Twitter-like social network that allows users to make posts, follow other users, and “like” posts.
+
+[YouTube link](https://youtu.be/vCPL5hpWFUY)
+
+### Site Preview:
+![site preview](https://github.com/belamotive/CS50_projects/blob/fa0778089fe0b56ff31c1a04379df66d62bb9cdd/Screenshot%202021-05-28%20at%2014.53.46.jpg)
+
+### Languages:
+- HTML/CSS/Sass
+- JavaScript
+- Python
+
+### Framework:
+- Django
+
+### Database:
+- SQL (SQLite)
+
+### Tools:
+- Bootstrap
