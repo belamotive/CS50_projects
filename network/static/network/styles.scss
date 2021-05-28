@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Lato&display=swap');
+
+$white: #fafafa;
+$black: #050505;
+$purple: #5158bb;
+$lighterpurple: #5e65c5;
+
+$alata: 'Alata', sans-serif;
+$lato: 'Lato', sans-serif;
+
+.boxshadow {
+  position: relative;
+  box-shadow: 0px 2px 100px 0px rgba(0,0,0,0.1);
+-webkit-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.1);
+-moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
+  border-radius: 0.25rem;
+  padding: 15px;
+  margin: 0 0 24px 0;
+
+  .editbtn {
+    position: absolute;
+    top: 7px;
+    right: 1px;
+  }
+}
+
+.btn-light {
+  background-color: inherit;
+  border: none;
+}
+
+.btn-purple {
+  background-color: $purple;
+  border: none;
+  color: $white;
+}
+
+.btn-purple:hover {
+  background-color: $lighterpurple;
+  color: $white;
+}
+
+.user {
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.post {
+  margin-bottom: 5px;
+}
+
+.date {
+  font-size: 0.65em;
+  color: grey;
+}
+
+.profilename {
+  text-align: center;
+  margin: 15px 0;
+}
+
+body {
+  position: relative;
+  font-family: $lato;
+  background-color: $white;
+  color: $black;
+
+  nav {
+    button {
+      color: $black;
+      background: none;
+      border: none;
+      text-align: left;
+    }
+
+    button:hover {
+      color: $purple;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    a {
+      color: $black;
+    }
+
+    a:hover {
+      color: $purple;
+    }
+  }
+
+  form {
+
+    textarea {
+      margin: 0;
+      width: 100%;
+    }
+  }
+}
+
+#paginav {
+  display: none;
+  margin-bottom: 36px;
+}
+
+#alert {
+  display: none;
+}
+
